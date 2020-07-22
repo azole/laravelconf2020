@@ -84,6 +84,10 @@
                     Laravel
                 </div>
 
+                <div class="title m-b-md">
+                    我是一個網站，可以上傳圖片、登入、定期寄送報告
+                </div>                
+
                 <div class="links">
                     <a href="https://laravel.com/docs">Docs</a>
                     <a href="https://laracasts.com">Laracasts</a>
