@@ -84,9 +84,6 @@ sudo bash -c 'echo LC_ALL="en_US.UTF-8" >> /etc/environment'
   sudo yum install -y nodejs
 
 ## create apache config and start httpd / php-fpm
-  #sudo cp config/apache/httpd.conf /etc/httpd/conf/httpd.conf
-  #sudo cp config/php/php.ini /etc/php.ini
-
   sudo rm -f /etc/httpd/conf.d/ssl.conf
 
   sudo httpd -k start
@@ -114,7 +111,7 @@ sudo bash -c 'echo LC_ALL="en_US.UTF-8" >> /etc/environment'
   npm run prod
   sudo ln -sfn /var/www/projects/laravelconf2020/public /var/www/html
   sudo chown -R ec2-user:apache /var/www/projects/laravelconf2020/storage
-  cp deploy/config/apache/httpd.conf /etc/httpd/conf/httpd.conf
+  sudo cp deploy/config/apache/httpd.conf /etc/httpd/conf/httpd.conf
   sudo httpd -k restart
 
 ### install cron
