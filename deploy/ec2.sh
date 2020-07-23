@@ -121,3 +121,14 @@ sudo bash -c 'echo LC_ALL="en_US.UTF-8" >> /etc/environment'
     ( crontab -l ; echo "* * * * * php /var/www/projects/laravelconf2020/artisan schedule:run >> /dev/null 2>&1" ) | crontab -
     set -ex -u -o pipefail
   fi
+
+#### ec2 need attach role to allow write log to cloudwatch
+  install_rpm amazon-cloudwatch-agent "https://s3.amazonaws.com/amazoncloudwatch-agent/amazon_linux/amd64/latest/amazon-cloudwatch-agent.rpm" "amazon-cloudwatch-agent.rpm"
+  sudo mkdir -p /opt/aws/amazon-cloudwatch-agent/config
+  sudo cp /var/www/projects/laravelconf2020/deploy/config/cwagent/cwagent.config.json /opt/aws/amazon-cloudwatch-agent/config/cwagent.config.json
+  sudo cp /var/www/projects/laravelconf2020/deploy/config/cwagent/cwagent.apache.config.json /opt/aws/amazon-cloudwatch-agent/config/cwagent.apache.config.json
+  sudo cp /var/www/projects/laravelconf2020/deploy/config/cwagent/cwagent.laraconf.config.json /opt/aws/amazon-cloudwatch-agent/config/cwagent.laraconf.config.json
+  sudo amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -c file://opt/aws/amazon-cloudwatch-agent/config/cwagent.config.json -s
+  sudo amazon-cloudwatch-agent-ctl -a append-config -m ec2 -c file://opt/aws/amazon-cloudwatch-agent/config/cwagent.apache.config.json -s
+  sudo amazon-cloudwatch-agent-ctl -a append-config -m ec2 -c file://opt/aws/amazon-cloudwatch-agent/config/cwagent.laraconf.config.json -s
+  sudo amazon-cloudwatch-agent-ctl -a status
