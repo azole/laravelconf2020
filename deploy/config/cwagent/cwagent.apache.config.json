@@ -1,0 +1,21 @@
+{
+  "logs": {
+    "logs_collected": {
+      "files": {
+        "collect_list": [
+          {
+            "file_path": "/var/log/httpd/access_log",
+            "log_group_name": "API-Server-{TDC_ENV}",
+            "log_stream_name": "apache-{instance_id}-access",
+            "timestamp_format": "%d/%b/%Y:%H:%M:%S"
+          }, {
+            "file_path": "/var/log/httpd/error_log",
+            "log_group_name": "API-Server-{TDC_ENV}",
+            "log_stream_name": "apache-{instance_id}-error",
+            "timestamp_format": "%d/%b/%Y:%H:%M:%S"
+          }
+        ]
+      }
+    }
+  }
+}
