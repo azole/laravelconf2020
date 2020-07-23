@@ -20,4 +20,11 @@ class ImageUploadController extends Controller
             ->with('success', '上傳成功')
             ->with('image', $image->path);
     }
+
+    public function list()
+    {
+        $images = Image::latest()->take(5)->get();
+
+        return view('images', ['images' => $images]);
+    }
 }

@@ -23,6 +23,8 @@ Route::get('/upload', function () {
 
 Route::post('image-upload', 'ImageUploadController@upload')->name('image.upload.post');
 
+Route::get('images', 'ImageUploadController@list')->name('image.list');
+
 
 Auth::routes();
 
