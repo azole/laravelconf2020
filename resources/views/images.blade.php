@@ -6,7 +6,7 @@
         <div class="col-md-8">
             @foreach($images as $image)
             <div class="card">
-              <img src="{{ $image->path }}">
+              <img src="{{ asset('storage/' . $image->path) }}">
             </div>
             @endforeach
         </div>

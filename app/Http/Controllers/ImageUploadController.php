@@ -12,13 +12,13 @@ class ImageUploadController extends Controller
         $image = new Image;
 
         $image->name = time() . '.' .  $request->image->extension();
-        $image->path = '/storage/' . $request->file('image')->storeAs('images', $image->name, 'public');
+        $image->path = $request->file('image')->storeAs('images', $image->name, 'public');
 
         $image->save();
 
         return back()
             ->with('success', '上傳成功')
-            ->with('image', $image->path);
+            ->with('image', asset('storage/' . $image->path));
     }
 
     public function list()
